@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Met_Raphson">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/back_incio"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/back" />
+
+                <TextView
+                    android:id="@+id/Txt_Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="Metodo de Raphson"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="34sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/funcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/backgr_editext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Funcition"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#707070"
+                    android:textColorHint="#707070"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/intervals_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/backgr_editext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Valor Inicial"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#707070"
+                    android:textColorHint="#707070"
+                    android:textSize="16sp" />
+
+
+
+                <EditText
+                    android:id="@+id/tole"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/backgr_editext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="Tolerancia"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#707070"
+                    android:textColorHint="#707070"
+                    android:textSize="16sp" />
+                <com.zanvent.mathview.MathView
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:id="@+id/mathview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <com.zanvent.mathview.MathView
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:id="@+id/mathview2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_solu2"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgrand_btn"
+                    android:gravity="center"
+                    android:text="Solucionar"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_marginTop="29dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/vra_x1"
+                    android:layout_width="28dp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="X1" />
+
+                <TextView
+                    android:id="@+id/vra_fx1"
+                    android:layout_width="28dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="F(x1)" />
+
+                <TextView
+                    android:id="@+id/vra_df2"
+                    android:layout_width="28dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="F'(x1)" />
+
+                <TextView
+                    android:id="@+id/vra_x2"
+                    android:layout_width="28dp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="X2"
+                    />
+
+                <TextView
+                    android:id="@+id/erroP"
+                    android:layout_width="28dp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="e"
+                    android:textStyle="bold"
+                    />
+
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/print_vra_x1"
+                    android:layout_width="28dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/print_vra_fx1"
+                    android:layout_width="28dp"
+                    android:textSize="16sp"
+
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/print_vra_fdx"
+                    android:layout_width="28dp"
+                    android:textSize="16sp"
+
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0" />
+
+                <TextView
+                    android:id="@+id/print_f_x2"
+                    android:layout_width="28dp"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textStyle="italic"
+                    />
+
+                <TextView
+                    android:id="@+id/print_e"
+                    android:layout_width="28dp"
+                    android:textSize="16sp"
+
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textStyle="italic"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/raiz"
+                    android:layout_width="wrap_content"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
