@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Numerical methods</string>
+    <string name="copyright">© 2024 Martin Perez. Todos los derechos reservados.</string>
 </resources>

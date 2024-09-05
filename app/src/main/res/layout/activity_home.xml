@@ -8,6 +8,7 @@
     tools:context=".Home">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -15,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -27,15 +28,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="32dp"
-                    android:layout_marginBottom="32dp"
                     android:layout_marginEnd="61dp"
+                    android:layout_marginBottom="32dp"
                     android:text="Metodos Numericos"
                     android:textColor="@color/black"
                     android:textSize="32sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
@@ -98,6 +98,7 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_secante"
                     style="@android:style/Widget.Button"
@@ -114,6 +115,7 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_Jacobi"
                     style="@android:style/Widget.Button"
@@ -131,8 +133,37 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_gauss"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgrand_btn"
+                    android:gravity="center"
+                    android:text="Metodo Gauss Seidel"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/link"
+                    android:textColor="@color/blanco"
+                    android:layout_marginTop="150dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="30px"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/copyright"
+                    android:textStyle="bold" />
+
 
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
