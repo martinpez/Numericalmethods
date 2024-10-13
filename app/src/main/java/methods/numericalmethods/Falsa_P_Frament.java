@@ -3,69 +3,126 @@ package methods.numericalmethods;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.util.Log;
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.zanvent.mathview.MathView;
 
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-
-public class Met_falsa_pos extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link Falsa_P_Frament#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class Falsa_P_Frament extends Fragment {
 
     private EditText funcion, intervals_a, intervals_b, tole;
     private TextView print_vra_a, print_vra_b, print_vra_c, print_f_a, print_f_b, print_f_c, print_errorP, raiz1 ;
     private Button btn_solu2;
     private ImageView back_inicio;
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public Falsa_P_Frament() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Falsa_P_Frament.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static Falsa_P_Frament newInstance(String param1, String param2) {
+        Falsa_P_Frament fragment = new Falsa_P_Frament();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_met_falsa_pos);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_met_falsa_pos, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
 
 
-        back_inicio = findViewById(R.id.back_incio);
+        back_inicio = getActivity().findViewById(R.id.back_incio);
 
-        back_inicio.setOnClickListener(view -> {
-            Intent intent = new Intent(Met_falsa_pos.this, Home.class);
-            startActivity(intent);
+        back_inicio.setOnClickListener(View -> {
+            Navigation.findNavController(view).navigate(R.id.home_Framet);
+           // Intent intent = new Intent(Met_falsa_pos.this, Home.class);
+            //startActivity(intent);
         });
 
         // Edit text
-        funcion = findViewById(R.id.Funcion1);
-        intervals_a = findViewById(R.id.Funcion2);
-        intervals_b = findViewById(R.id.Funcion3);
-        tole = findViewById(R.id.tole);
+        funcion = getActivity().findViewById(R.id.Funcion1);
+        intervals_a = getActivity().findViewById(R.id.Funcion2);
+        intervals_b = getActivity().findViewById(R.id.Funcion3);
+        tole = getActivity().findViewById(R.id.tole);
 
         // TextViews
-        print_vra_a = findViewById(R.id.print_vra_a);
-        print_vra_b = findViewById(R.id.print_vra_b);
-        print_vra_c = findViewById(R.id.print_vra_c);
-        print_f_a = findViewById(R.id.print_f_a);
-        print_f_b = findViewById(R.id.print_f_b);
-        print_f_c = findViewById(R.id.print_f_c);
-        print_errorP = findViewById(R.id.print_errorP);
-        raiz1 = findViewById(R.id.raiz1);
+        print_vra_a = getActivity().findViewById(R.id.print_vra_a);
+        print_vra_b = getActivity().findViewById(R.id.print_vra_b);
+        print_vra_c = getActivity().findViewById(R.id.print_vra_c);
+        print_f_a = getActivity().findViewById(R.id.print_f_a);
+        print_f_b = getActivity().findViewById(R.id.print_f_b);
+        print_f_c = getActivity().findViewById(R.id.print_f_c);
+        print_errorP = getActivity().findViewById(R.id.print_errorP);
+        raiz1 = getActivity().findViewById(R.id.raiz1);
 
 
         // Button
-        btn_solu2 = findViewById(R.id.btn_solu2);
+        btn_solu2 = getActivity().findViewById(R.id.btn_solu2);
 
-        btn_solu2.setOnClickListener(view -> {
+        btn_solu2.setOnClickListener(View -> {
             ValidadorEntradas();
         });
     }
 
     public void ValidadorEntradas() {
-        MathView mathview = findViewById(R.id.mathview);
+        MathView mathview =getActivity().findViewById(R.id.mathview);
         String input = funcion.getText().toString().trim();
         String inputA = intervals_a.getText().toString().trim();
         String inputB = intervals_b.getText().toString().trim();
@@ -84,7 +141,7 @@ public class Met_falsa_pos extends AppCompatActivity {
 
             metodoFalsaPosicion(input, a, b, tolerancia);
         } else {
-            showAlertDialog(this, "Error", "Los datos no se pueden estar vacíos.");
+            showAlertDialog(getContext(), "Error", "Los datos no se pueden estar vacíos.");
         }
     }
 
@@ -178,3 +235,4 @@ public class Met_falsa_pos extends AppCompatActivity {
     }
 
 }
+

@@ -13,25 +13,7 @@
         android:theme="@style/Theme.NumericalMethods"
         tools:targetApi="31">
         <activity
-            android:name=".Met_Gauss_seidel"
-            android:exported="false" />
-        <activity
-            android:name=".Met_jacobi"
-            android:exported="false" />
-        <activity
-            android:name=".Met_falsa_pos"
-            android:exported="false" />
-        <activity
-            android:name=".Met_Secante"
-            android:exported="false" />
-        <activity
-            android:name=".Met_Biseccion"
-            android:exported="false" />
-        <activity
-            android:name=".Met_Raphson"
-            android:exported="false" />
-        <activity
-            android:name=".Home"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
+        </application>
 
 </manifest>

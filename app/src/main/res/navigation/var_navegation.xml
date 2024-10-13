@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/var_navegation"
+    app:startDestination="@id/home_Framet">
+    <fragment
+        android:id="@+id/home_Framet"
+        android:name="methods.numericalmethods.Home_Framet"
+        android:label="fragment_home__framet"
+        tools:layout="@layout/fragment_home__framet" >
+        <action
+            android:id="@+id/action_home_Framet_to_biseccion_Framet"
+            app:destination="@id/biseccion_Framet" />
+        <action
+            android:id="@+id/action_home_Framet_to_falsa_P_Frament"
+            app:destination="@id/falsa_P_Frament" />
+        <action
+            android:id="@+id/action_home_Framet_to_gauss_seidel"
+            app:destination="@id/gauss_seidel" />
+        <action
+            android:id="@+id/action_home_Framet_to_jaccobi"
+            app:destination="@id/jaccobi" />
+        <action
+            android:id="@+id/action_home_Framet_to_raphson"
+            app:destination="@id/raphson" />
+        <action
+            android:id="@+id/action_home_Framet_to_secante"
+            app:destination="@id/secante" />
+    </fragment>
+    <fragment
+        android:id="@+id/biseccion_Framet"
+        android:name="methods.numericalmethods.Biseccion_Framet"
+        android:label="fragment_biseccion"
+        tools:layout="@layout/fragment_biseccion" >
+        <action
+            android:id="@+id/action_biseccion_Framet_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/falsa_P_Frament"
+        android:name="methods.numericalmethods.Falsa_P_Frament"
+        android:label="fragment_falsa__p"
+        tools:layout="@layout/fragment_falsa__p" >
+        <action
+            android:id="@+id/action_falsa_P_Frament_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/gauss_seidel"
+        android:name="methods.numericalmethods.Gauss_seidel"
+        android:label="fragment_gauss_seidel"
+        tools:layout="@layout/fragment_gauss_seidel" >
+        <action
+            android:id="@+id/action_gauss_seidel_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/jaccobi"
+        android:name="methods.numericalmethods.Jaccobi"
+        android:label="fragment_jaccobi"
+        tools:layout="@layout/fragment_jaccobi" >
+        <action
+            android:id="@+id/action_jaccobi_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/raphson"
+        android:name="methods.numericalmethods.Raphson"
+        android:label="fragment_raphson"
+        tools:layout="@layout/fragment_raphson" >
+        <action
+            android:id="@+id/action_raphson_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/secante"
+        android:name="methods.numericalmethods.secante"
+        android:label="fragment_secante"
+        tools:layout="@layout/fragment_secante" >
+        <action
+            android:id="@+id/action_secante_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+</navigation>

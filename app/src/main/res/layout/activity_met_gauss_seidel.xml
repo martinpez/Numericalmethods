@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Met_Gauss_seidel">
+    >
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -15,12 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="25dp"
             android:padding="16dp">
 
             <!-- Layout para el título y la imagen de retroceso -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -37,12 +39,17 @@
                     android:text="Método de Gauss-Seidel"
                     android:textAlignment="center"
                     android:textSize="34sp"
+                    android:layout_marginEnd="16dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Entrada para los coeficientes de la matriz A (3x3) -->
             <TextView
                 android:layout_width="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="12dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 android:layout_height="wrap_content"
                 android:text="Introduce los coeficientes de la matriz (3x3)" />
 

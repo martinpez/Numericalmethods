@@ -1,18 +1,22 @@
 package methods.numericalmethods;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 
 import com.chaquo.python.PyObject;
 import com.chaquo.python.Python;
@@ -21,52 +25,104 @@ import com.zanvent.mathview.MathView;
 
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Met_Raphson extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link Raphson#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class Raphson extends Fragment {
 
     private EditText funcion, intervals_a, tole;
     private TextView print_vra_x1, print_vra_fx1, raiz, print_vra_fdx, print_f_x2, print_e;
     private Button btn_solu2 ;
     private ImageView back_incio;
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    public Raphson() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Raphson.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static Raphson newInstance(String param1, String param2) {
+        Raphson fragment = new Raphson();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_met_raphson);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_met_raphson, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
 
         // chaquo libreria
         if (!Python.isStarted()) {
-            Python.start(new AndroidPlatform(this));
+            Python.start(new AndroidPlatform(getContext()));
         }
 
         // imagesView
 
-        back_incio = findViewById(R.id.back_incio);
+        back_incio = getActivity().findViewById(R.id.back_incio);
 
-        back_incio.setOnClickListener(view -> {
-            Intent intent = new Intent(Met_Raphson.this, Home.class);
-            startActivity(intent);
+        back_incio.setOnClickListener(View -> {
+            Navigation.findNavController(view).navigate(R.id.home_Framet);
+            //  Intent intent = new Intent(Met_Raphson.this, Home.class);
+            // startActivity(intent);
         });
 
 
         // Edit text
-        funcion = findViewById(R.id.funcion);
-        intervals_a = findViewById(R.id.intervals_a);
-        tole = findViewById(R.id.tole);
+        funcion = getActivity().findViewById(R.id.funcion);
+        intervals_a = getActivity().findViewById(R.id.intervals_a);
+        tole = getActivity().findViewById(R.id.tole);
 
 
         // txt
-        print_vra_x1 = findViewById(R.id.print_vra_x1);
-        print_vra_fx1 = findViewById(R.id.print_vra_fx1);
-        print_vra_fdx = findViewById(R.id.print_vra_fdx);
-        print_f_x2 = findViewById(R.id.print_f_x2);
-        print_e = findViewById(R.id.print_e);
-        raiz = findViewById(R.id.raiz);
+        print_vra_x1 = getActivity().findViewById(R.id.print_vra_x1);
+        print_vra_fx1 = getActivity().findViewById(R.id.print_vra_fx1);
+        print_vra_fdx = getActivity().findViewById(R.id.print_vra_fdx);
+        print_f_x2 = getActivity().findViewById(R.id.print_f_x2);
+        print_e = getActivity().findViewById(R.id.print_e);
+        raiz = getActivity().findViewById(R.id.raiz);
 
         // Button
-        btn_solu2 = findViewById(R.id.btn_solu2);
+        btn_solu2 = getActivity().findViewById(R.id.btn_solu2);
 
-        btn_solu2.setOnClickListener(view -> {
+        btn_solu2.setOnClickListener(View -> {
             ValidadorEntradas();
         });
     }
@@ -82,14 +138,14 @@ public class Met_Raphson extends AppCompatActivity {
         PyObject pyresult = pyObj.callAttr("derive_function", expre);
         String derivative = pyresult.toString();
         System.out.println("Funcion Derivada " + derivative);
-       // String  fundx= "x*(3+x+6)+12 ";
+        // String  fundx= "x*(3+x+6)+12 ";
         return derivative.toString();
     }
 
 
 
     public void ValidadorEntradas(){
-        MathView mathview = findViewById(R.id.mathview);
+        MathView mathview = getActivity().findViewById(R.id.mathview);
 
         String input = funcion.getText().toString().trim();
         String input2 = intervals_a.getText().toString().trim();
@@ -113,7 +169,7 @@ public class Met_Raphson extends AppCompatActivity {
             //
             metodoNewtonRaphson( expression, a, tolerancia);
         } else {
-            showAlertDialog(this, "Error", "Los datos no se pueden estar vacíos");
+            showAlertDialog(getContext(), "Error", "Los datos no se pueden estar vacíos");
         }
     }
 
@@ -142,7 +198,7 @@ public class Met_Raphson extends AppCompatActivity {
             double fdx1 = evaluarFuncionderivada(derivadaExpresion, x1);
 
             if (fdx1 == 0) {
-                showAlertDialog(this, "Error", "La derivada se ha vuelto cero.");
+                showAlertDialog(getContext(), "Error", "La derivada se ha vuelto cero.");
                 return;
             }
 
@@ -193,7 +249,7 @@ public class Met_Raphson extends AppCompatActivity {
             // Reemplaza ^ con ** en la expresión
             String expresionConvertida = expresion.replace("**", "^");
 
-            MathView mathview2 = findViewById(R.id.mathview2);
+            MathView mathview2 = getActivity().findViewById(R.id.mathview2);
             String latexDerivada = "$" + expresionConvertida + "$";
             String dxLtex = "f'(x) = ";
             String dx = "$" + dxLtex + "$";

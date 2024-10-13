@@ -23,7 +23,7 @@ android {
 
         flavorDimensions += "pyVersion"
         productFlavors {
-            create("py312") { dimension = "pyVersion" }
+            create("py38") { dimension = "pyVersion" }
         }
     }
 
@@ -49,15 +49,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 chaquopy {
     productFlavors {
-        getByName("py312") { version = "3.12" }
+        getByName("py38") { version = "3.8" }
     }
 
     defaultConfig {
-        buildPython("C:/Users/Hp-pavilion/AppData/Local/Programs/Python/Python312/python.exe")
+        buildPython("C:/Users/Hp-pavilion/AppData/Local/Programs/Python/Python38/python.exe")
         pip {
             install ("sympy")
         }
@@ -77,6 +80,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation ("com.github.frhnfrq:MathView:1.2")
     implementation ("net.objecthunter:exp4j:0.4.8")
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
