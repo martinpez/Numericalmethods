@@ -33,6 +33,15 @@
         <action
             android:id="@+id/action_home_Framet_to_spline_cubica"
             app:destination="@id/spline_cubica" />
+        <action
+            android:id="@+id/action_home_Framet_to_lagrange"
+            app:destination="@id/lagrange" />
+        <action
+            android:id="@+id/action_home_Framet_to_diferencias_Divididas"
+            app:destination="@id/diferencias_Divididas" />
+        <action
+            android:id="@+id/action_home_Framet_to_lagrange2"
+            app:destination="@id/lagrange2" />
     </fragment>
     <fragment
         android:id="@+id/biseccion_Framet"
@@ -104,6 +113,33 @@
         tools:layout="@layout/fragment_spline_cubica" >
         <action
             android:id="@+id/action_spline_cubica_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/lagrange"
+        android:name="methods.numericalmethods.lagrange"
+        android:label="fragment_lagrange"
+        tools:layout="@layout/fragment_lagrange" >
+        <action
+            android:id="@+id/action_lagrange_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/diferencias_Divididas"
+        android:name="methods.numericalmethods.Diferencias_Divididas"
+        android:label="fragment_diferencias__divididas"
+        tools:layout="@layout/fragment_diferencias__divididas" >
+        <action
+            android:id="@+id/action_diferencias_Divididas_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/lagrange2"
+        android:name="methods.numericalmethods.Lagrange"
+        android:label="fragment_lagrange"
+        tools:layout="@layout/fragment_lagrange" >
+        <action
+            android:id="@+id/action_lagrange2_to_home_Framet"
             app:destination="@id/home_Framet" />
     </fragment>
 </navigation>

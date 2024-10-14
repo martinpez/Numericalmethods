@@ -60,7 +60,7 @@ chaquopy {
     }
 
     defaultConfig {
-        buildPython("C:/Users/Hp-pavilion/AppData/Local/Programs/Python/Python38/python.exe")
+        buildPython("C:/Users/Martin Elias/AppData/Local/Programs/Python/Python38/python.exe")
         pip {
             install ("sympy")
         }
@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
     implementation("org.apache.commons:commons-math3:3.6.1")
     implementation ("com.github.frhnfrq:MathView:1.2")
     implementation ("net.objecthunter:exp4j:0.4.8")

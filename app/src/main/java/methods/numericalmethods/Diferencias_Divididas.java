@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -20,28 +19,26 @@ import android.widget.TextView;
 
 import com.zanvent.mathview.MathView;
 
-import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
-import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
+import org.apache.commons.math3.analysis.interpolation.DividedDifferenceInterpolator;
+import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
+import org.apache.commons.math3.analysis.polynomials.PolynomialFunctionNewtonForm;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Spline_cubica#newInstance} factory method to
+ * Use the {@link Diferencias_Divididas#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Spline_cubica extends Fragment {
+public class Diferencias_Divididas extends Fragment {
 
     private ImageView cochete , back_incio;
-    private Button btn_resolv;
-    private EditText x_1a , x_1b, x_2a ,x_2b , x_3a ,x_3b , x_4a , x_4b , x_5a ,x_5b , x_6a , x_6b , x_7a , x_7b;
-    private TextView interpolacion;
+    private Button btn_res;
+    private EditText x_1a , x_1b, x_2a ,x_2b , x_3a ,x_3b , x_4a , x_4b , x_5a ,x_5b , x_6a , x_6b ;
+    private TextView interpolacion ,textView4;
     StringBuilder latexOutput = new StringBuilder();
-
-
-    private double[] x, y;
-    private double[] a, b, c, d;
-    private int n;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +49,7 @@ public class Spline_cubica extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Spline_cubica() {
+    public Diferencias_Divididas() {
         // Required empty public constructor
     }
 
@@ -62,11 +59,11 @@ public class Spline_cubica extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Spline_cubica.
+     * @return A new instance of fragment Diferencias_Divididas.
      */
     // TODO: Rename and change types and number of parameters
-    public static Spline_cubica newInstance(String param1, String param2) {
-        Spline_cubica fragment = new Spline_cubica();
+    public static Diferencias_Divididas newInstance(String param1, String param2) {
+        Diferencias_Divididas fragment = new Diferencias_Divididas();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,23 +84,12 @@ public class Spline_cubica extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spline_cubica, container, false);
+        return inflater.inflate(R.layout.fragment_diferencias__divididas, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // TXT
-        interpolacion = getActivity().findViewById(R.id.interpolacion);
-
-        // Button
-        btn_resolv = getActivity().findViewById(R.id.btn_resolv);
-
-        //IMAGEN WIEW
-        cochete = getActivity().findViewById(R.id.cochete);
-        back_incio = getActivity().findViewById(R.id.back_incio);
-
 
         //EDITEXT
         x_1a = getActivity().findViewById(R.id.x_1a);
@@ -118,10 +104,11 @@ public class Spline_cubica extends Fragment {
         x_5b = getActivity().findViewById(R.id.x_5b);
         x_6a = getActivity().findViewById(R.id.x_6a);
         x_6b = getActivity().findViewById(R.id.x_6b);
-        x_7a = getActivity().findViewById(R.id.x_7a);
-        x_7b = getActivity().findViewById(R.id.x_7b);
+
 
         // Darle la funcion al edit text de póner el teclado numerico directamente
+
+        btn_res = getActivity().findViewById(R.id.btn_res);
 
         x_1a.setInputType(InputType.TYPE_CLASS_PHONE);
         x_1b.setInputType(InputType.TYPE_CLASS_PHONE);
@@ -135,20 +122,16 @@ public class Spline_cubica extends Fragment {
         x_5b.setInputType(InputType.TYPE_CLASS_PHONE);
         x_6a.setInputType(InputType.TYPE_CLASS_PHONE);
         x_6b.setInputType(InputType.TYPE_CLASS_PHONE);
-        x_7a.setInputType(InputType.TYPE_CLASS_PHONE);
-        x_7b.setInputType(InputType.TYPE_CLASS_PHONE);
 
-        btn_resolv.setOnClickListener(View -> {
+        textView4 =getView().findViewById(R.id.textView4);
+        btn_res.setOnClickListener(View -> {
 
             validador();
         });
 
-        back_incio.setOnClickListener(View -> {
-            Navigation.findNavController(view).navigate(R.id.home_Framet);
-        });
-
 
     }
+
     public void validador(){
         String input = x_1a.getText().toString().trim();
         String input1 = x_1b.getText().toString().trim();
@@ -162,14 +145,12 @@ public class Spline_cubica extends Fragment {
         String input9 = x_5b.getText().toString().trim();
         String input10 = x_6a.getText().toString().trim();
         String input11 = x_6b.getText().toString().trim();
-        String input12 = x_7a.getText().toString().trim();
-        String input13 = x_7b.getText().toString().trim();
 
 
         if (!input.isEmpty() && !input1.isEmpty() && !input2.isEmpty() && !input3.isEmpty()
                 && !input4.isEmpty() && !input5.isEmpty() && !input6.isEmpty() && !input7.isEmpty()
                 && !input8.isEmpty() && !input9.isEmpty() && !input10.isEmpty() && !input11.isEmpty()
-                && !input12.isEmpty() && !input13.isEmpty() ){
+        ){
 
             double x1a = Double.parseDouble(x_1a.getText().toString());
             double x1b = Double.parseDouble(x_1b.getText().toString());
@@ -183,12 +164,10 @@ public class Spline_cubica extends Fragment {
             double x5b = Double.parseDouble(x_5b.getText().toString());
             double x6a = Double.parseDouble(x_6a.getText().toString());
             double x6b = Double.parseDouble(x_6b.getText().toString());
-            double x7a = Double.parseDouble(x_7a.getText().toString());
-            double x7b = Double.parseDouble(x_7b.getText().toString());
 
 
 
-            splineCubico(x1a , x1b ,x2a , x2b, x3a, x3b, x4a, x4b, x5a, x5b, x6a, x6b, x7a, x7b);
+            diferencias(x1a , x1b ,x2a , x2b, x3a, x3b, x4a, x4b, x5a, x5b, x6a, x6b);
 
 
         }else {
@@ -198,17 +177,14 @@ public class Spline_cubica extends Fragment {
 
     }
 
+    public  void diferencias(double x1a, double x1b, double x2a, double x2b, double x3a, double x3b, double x4a, double x4b, double x5a, double x5b, double x6a, double x6b) {
 
+        double[] x = {x1a, x2a, x3a, x4a, x5a, x6a}; // Coordenadas X
+        double[] y = {x1b, x2b, x3b, x4b, x5b, x6b}; // Coordenadas Y
 
-    public  void splineCubico(double x1a, double x1b, double x2a, double x2b, double x3a, double x3b, double x4a, double x4b, double x5a, double x5b, double x6a, double x6b, double x7a, double x7b) {
-        double[] x = {x1a, x2a, x3a, x4a, x5a, x6a, x7a}; // Coordenadas X
-        double[] y = {x1b, x2b, x3b, x4b, x5b, x6b, x7b}; // Coordenadas Y
-
-
-
-        // Crear listas para guardar los puntos no vacíos
-        ArrayList<Double> xValid = new ArrayList<>();
-        ArrayList<Double> yValid = new ArrayList<>();
+        // Listas para los puntos válidos
+        List<Double> xValid = new ArrayList<>();
+        List<Double> yValid = new ArrayList<>();
 
         // Eliminar los pares (0, 0) que representan puntos vacíos
         for (int i = 0; i < x.length; i++) {
@@ -218,47 +194,121 @@ public class Spline_cubica extends Fragment {
             }
         }
 
-        // Convertir las listas a arrays nuevamente
-        double[] xClean = new double[xValid.size()];
-        double[] yClean = new double[yValid.size()];
+        // Convertir las listas a arrays
+        double[] xValidArr = xValid.stream().mapToDouble(Double::doubleValue).toArray();
+        double[] yValidArr = yValid.stream().mapToDouble(Double::doubleValue).toArray();
 
-        for (int i = 0; i < xValid.size(); i++) {
-            xClean[i] = xValid.get(i);
-            yClean[i] = yValid.get(i);
-        }
-
-        // Verificar si hay al menos dos puntos para interpolar
-        if (xClean.length < 2) {
-            showAlertDialog(getContext(),"Error", "Se necesitan al menos 2 puntos válidos para la interpolación");
+        // Verificar si hay suficientes puntos para la interpolación
+        if (xValidArr.length < 2) {
+            System.out.println("Se necesitan al menos dos puntos válidos para la interpolación.");
             return;
         }
 
-        // Crear el interpolador cúbico
-        SplineInterpolator splineInterpolator = new SplineInterpolator();
-        PolynomialSplineFunction splineFunction = splineInterpolator.interpolate(xClean, yClean);
+        // Crea un interpolador de diferencias divididas
+        DividedDifferenceInterpolator interpolator = new DividedDifferenceInterpolator();
 
-        // Iterar sobre los intervalos de interpolación
-        for (int i = 0; i < splineFunction.getN(); i++) {
-            double a = splineFunction.getPolynomials()[i].getCoefficients()[3]; // Coeficiente cúbico
-            double b = splineFunction.getPolynomials()[i].getCoefficients()[2]; // Coeficiente cuadrático
-            double c = splineFunction.getPolynomials()[i].getCoefficients()[1]; // Coeficiente lineal
-            double d = splineFunction.getPolynomials()[i].getCoefficients()[0]; // Coeficiente constante
+        // Genera el polinomio de Newton utilizando diferencias divididas
+        PolynomialFunctionNewtonForm newtonPolinomio = interpolator.interpolate(xValidArr, yValidArr);
 
-            cochete.setVisibility(getView().getVisibility());
-            // Mostrar la ecuación del polinomio en el intervalo
-            System.out.printf("P%d(x) = %.4f(x - %.1f)^3 + %.4f(x - %.1f)^2 + %.4f(x - %.1f) + %.4f, para %.1f <= x <= %.1f\n",
-                    i, a, xClean[i], b, xClean[i], c, xClean[i], d, xClean[i], xClean[i + 1]);
+        // Imprime el polinomio de Newton en forma simbólica
+        String polinomio = getNewtonPolynomialString(newtonPolinomio, xValidArr);
+        System.out.println("Polinomio de Newton: " + polinomio);
+        String polinomioSimplificado = getSimplifiedNewtonPolynomialString(newtonPolinomio, x);
+        System.out.println("Polinomio de Newton simplificado: " + polinomioSimplificado);
 
-            latexOutput.append(String.format("P%d(x) = %.4f(x - %.1f)^3 + %.4f(x - %.1f)^2 + %.4f(x - %.1f) + %.4f, \t %.1f <= x <= %.1f\n",
-                    i, a, xClean[i], b, xClean[i], c, xClean[i], d, xClean[i], xClean[i + 1]));
+        MathView mathview = getActivity().findViewById(R.id.mathview);
+        MathView mathview2 = getActivity().findViewById(R.id.mathview2);
+        String formi = ("F(x) = " + polinomio );
+        String latex2 = ("$" + formi + "$");
+        mathview2.setText(latex2);
+        mathview2.setPixelScaleType(MathView.Scale.SCALE_DP);
+        mathview2.setTextSize(20);
+        mathview2.setTextColor("#111111");
+
+        textView4.setVisibility(getView().getVisibility());
+        String formi1 = ("F(x) = " + polinomioSimplificado );
+        String latex1 = ("$" + formi1 + "$");
 
 
-
-        }
-
-        interpolacion.setText(latexOutput.toString());
+        mathview.setText(latex1);
+        mathview.setPixelScaleType(MathView.Scale.SCALE_DP);
+        mathview.setTextSize(20);
+        mathview.setTextColor("#111111");
 
     }
+
+    public static String getNewtonPolynomialString(PolynomialFunctionNewtonForm newtonPolinomio, double[] x) {
+        double[] coeficientes = newtonPolinomio.getCoefficients();
+        StringBuilder polinomio = new StringBuilder();
+
+        // Construir el polinomio de Newton como una cadena
+        for (int i = 0; i < coeficientes.length; i++) {
+            if (i > 0 && coeficientes[i] >= 0) {
+                polinomio.append(" + ");
+            } else if (i > 0) {
+                polinomio.append(" ");
+            }
+            polinomio.append(coeficientes[i]);
+
+            for (int j = 0; j < i; j++) {
+                polinomio.append("(x - ").append(x[j]).append(")");
+            }
+        }
+
+        return polinomio.toString();
+    }
+
+    public static String getSimplifiedNewtonPolynomialString(PolynomialFunctionNewtonForm newtonPolinomio, double[] x) {
+        double[] coeficientes = newtonPolinomio.getCoefficients();
+        StringBuilder polinomio = new StringBuilder();
+
+        // Formato para limitar los decimales
+        DecimalFormat decimalFormat = new DecimalFormat("#.####");
+
+        double termConstant = 0.0;
+        double termLinear = 0.0;
+        double termQuadratic = 0.0;
+
+        for (int i = 0; i < coeficientes.length; i++) {
+            if (coeficientes[i] == 0) {
+                continue; // Omitir términos con coeficientes 0
+            }
+
+            switch (i) {
+                case 0:
+                    termConstant = coeficientes[i];
+                    break;
+                case 1:
+                    termLinear = coeficientes[i];
+                    break;
+                case 2:
+                    termQuadratic = coeficientes[i];
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // Construir el polinomio simplificado
+        if (termQuadratic != 0) {
+            polinomio.append(decimalFormat.format(termQuadratic)).append("x^2");
+        }
+        if (termLinear != 0) {
+            if (polinomio.length() > 0 && termLinear > 0) {
+                polinomio.append(" + ");
+            }
+            polinomio.append(decimalFormat.format(termLinear)).append("x");
+        }
+        if (termConstant != 0) {
+            if (polinomio.length() > 0 && termConstant > 0) {
+                polinomio.append(" + ");
+            }
+            polinomio.append(decimalFormat.format(termConstant));
+        }
+
+        return polinomio.toString();
+    }
+
 
     private void showAlertDialog(Context context, String title, String message) {
         new AlertDialog.Builder(context)
@@ -276,6 +326,5 @@ public class Spline_cubica extends Fragment {
                 .setIcon(android.R.drawable.ic_delete)
                 .show();
     }
-
 
 }

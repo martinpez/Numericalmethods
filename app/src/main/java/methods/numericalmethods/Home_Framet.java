@@ -22,7 +22,7 @@ import android.widget.TextView;
  */
 public class Home_Framet extends Fragment {
 
-    private Button btn_bicce, btn_raphson, btn_falsa, btn_secante, btn_Jacobi, btn_gauss , btn_spline , btn_spline_cubica;
+    private Button btn_bicce, btn_raphson, btn_falsa, btn_secante, btn_Jacobi, btn_gauss , btn_spline , btn_spline_cubica,btn_divididas ,btn_lagrange;
     private TextView link;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -79,6 +79,7 @@ public class Home_Framet extends Fragment {
 
             //buton
             btn_bicce = getActivity().findViewById(R.id.btn_bicce);
+            btn_lagrange = getActivity().findViewById(R.id.btn_lagrange);
             btn_raphson = getActivity().findViewById(R.id.btn_raphson);
             btn_falsa = getActivity().findViewById(R.id.btn_falsa);
             btn_secante = getActivity().findViewById(R.id.btn_secante);
@@ -86,6 +87,7 @@ public class Home_Framet extends Fragment {
             btn_gauss = getActivity().findViewById(R.id.btn_gauss);
             btn_spline = getActivity().findViewById(R.id.btn_spline);
             btn_spline_cubica = getActivity().findViewById(R.id.btn_spline_cubica);
+            btn_divididas = getActivity().findViewById(R.id.btn_divididas);
             link = getActivity().findViewById(R.id.link);
 
             btn_gauss.setOnClickListener(View -> {
@@ -134,7 +136,13 @@ public class Home_Framet extends Fragment {
             Navigation.findNavController(view).navigate(R.id.spline_cubica);
         } );
 
+        btn_lagrange.setOnClickListener(View ->{
+            Navigation.findNavController(view).navigate(R.id.diferencias_Divididas);
+        } );
 
+        btn_divididas.setOnClickListener(View ->{
+            Navigation.findNavController(view).navigate(R.id.diferencias_Divididas);
+        } );
             link.setOnClickListener(View -> {
 
                 Intent intent = new Intent(Intent.ACTION_VIEW);
