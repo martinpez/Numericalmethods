@@ -230,8 +230,8 @@ public class Biseccion_Framet extends Fragment {
 
     private void showAlertDialog(Context context, String title, String message) {
         new AlertDialog.Builder(context)
-                .setTitle("Ups!")
-                .setMessage("Algo salio mal")
+                .setTitle(title)
+                .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     // Acción a realizar cuando el usuario presiona "Aceptar"
                 })

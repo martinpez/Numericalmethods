@@ -150,8 +150,46 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_spline"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgrand_btn"
+                    android:gravity="center"
+                    android:text="Metodo Spline Line Linear"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_spline_cubica"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/backgrand_btn"
+                    android:gravity="center"
+                    android:text="Metodo Spline Line Cubica"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+
                 <TextView
                     android:id="@+id/link"
+                    android:layout_marginVertical="91dp"
                     android:textColor="@color/blanco"
                     android:layout_marginTop="150dp"
                     android:layout_marginStart="16dp"

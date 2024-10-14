@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -23,7 +22,7 @@ import android.widget.TextView;
  */
 public class Home_Framet extends Fragment {
 
-    private Button btn_bicce, btn_raphson, btn_falsa, btn_secante, btn_Jacobi, btn_gauss;
+    private Button btn_bicce, btn_raphson, btn_falsa, btn_secante, btn_Jacobi, btn_gauss , btn_spline , btn_spline_cubica;
     private TextView link;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -85,6 +84,8 @@ public class Home_Framet extends Fragment {
             btn_secante = getActivity().findViewById(R.id.btn_secante);
             btn_Jacobi = getActivity().findViewById(R.id.btn_Jacobi);
             btn_gauss = getActivity().findViewById(R.id.btn_gauss);
+            btn_spline = getActivity().findViewById(R.id.btn_spline);
+            btn_spline_cubica = getActivity().findViewById(R.id.btn_spline_cubica);
             link = getActivity().findViewById(R.id.link);
 
             btn_gauss.setOnClickListener(View -> {
@@ -123,6 +124,15 @@ public class Home_Framet extends Fragment {
               //  Intent intent = new Intent(Home.this, Met_jacobi.class);
                // startActivity(intent);
             });
+
+            btn_spline.setOnClickListener(View -> {
+                Navigation.findNavController(view).navigate(R.id.spline_linear);
+            });
+
+
+        btn_spline_cubica.setOnClickListener(View ->{
+            Navigation.findNavController(view).navigate(R.id.spline_cubica);
+        } );
 
 
             link.setOnClickListener(View -> {

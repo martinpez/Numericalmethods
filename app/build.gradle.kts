@@ -12,7 +12,7 @@ android {
         minSdk = 29
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "2.23"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -78,6 +78,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation("org.apache.commons:commons-math3:3.6.1")
     implementation ("com.github.frhnfrq:MathView:1.2")
     implementation ("net.objecthunter:exp4j:0.4.8")
     implementation(libs.navigation.fragment)

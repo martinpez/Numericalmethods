@@ -27,6 +27,12 @@
         <action
             android:id="@+id/action_home_Framet_to_secante"
             app:destination="@id/secante" />
+        <action
+            android:id="@+id/action_home_Framet_to_spline_linear"
+            app:destination="@id/spline_linear" />
+        <action
+            android:id="@+id/action_home_Framet_to_spline_cubica"
+            app:destination="@id/spline_cubica" />
     </fragment>
     <fragment
         android:id="@+id/biseccion_Framet"
@@ -80,6 +86,24 @@
         tools:layout="@layout/fragment_secante" >
         <action
             android:id="@+id/action_secante_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/spline_linear"
+        android:name="methods.numericalmethods.spline_linear"
+        android:label="fragment_spline_linear"
+        tools:layout="@layout/fragment_spline_linear" >
+        <action
+            android:id="@+id/action_spline_linear_to_home_Framet"
+            app:destination="@id/home_Framet" />
+    </fragment>
+    <fragment
+        android:id="@+id/spline_cubica"
+        android:name="methods.numericalmethods.Spline_cubica"
+        android:label="fragment_spline_cubica"
+        tools:layout="@layout/fragment_spline_cubica" >
+        <action
+            android:id="@+id/action_spline_cubica_to_home_Framet"
             app:destination="@id/home_Framet" />
     </fragment>
 </navigation>
