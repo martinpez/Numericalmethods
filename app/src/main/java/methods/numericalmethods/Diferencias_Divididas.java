@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavAction;
+import androidx.navigation.Navigation;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -34,11 +36,11 @@ import java.util.List;
  */
 public class Diferencias_Divididas extends Fragment {
 
-    private ImageView cochete , back_incio;
+    private ImageView  back_incio;
     private Button btn_res;
     private EditText x_1a , x_1b, x_2a ,x_2b , x_3a ,x_3b , x_4a , x_4b , x_5a ,x_5b , x_6a , x_6b ;
     private TextView interpolacion ,textView4;
-    StringBuilder latexOutput = new StringBuilder();
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -122,6 +124,12 @@ public class Diferencias_Divididas extends Fragment {
         x_5b.setInputType(InputType.TYPE_CLASS_PHONE);
         x_6a.setInputType(InputType.TYPE_CLASS_PHONE);
         x_6b.setInputType(InputType.TYPE_CLASS_PHONE);
+
+        back_incio = getActivity().findViewById(R.id.back_incio);
+
+        back_incio.setOnClickListener(View -> {
+            Navigation.findNavController(view).navigate(R.id.home_Framet);
+        });
 
         textView4 =getView().findViewById(R.id.textView4);
         btn_res.setOnClickListener(View -> {

@@ -22,7 +22,7 @@ import android.widget.TextView;
  */
 public class Home_Framet extends Fragment {
 
-    private Button btn_bicce, btn_raphson, btn_falsa, btn_secante, btn_Jacobi, btn_gauss , btn_spline , btn_spline_cubica,btn_divididas ,btn_lagrange;
+    private Button  btn_bicce, btn_raphson, btn_falsa, btn_secante, btn_Jacobi, btn_gauss , btn_spline , btn_spline_cubica,btn_divididas ,btn_lagrange;
     private TextView link;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -78,6 +78,7 @@ public class Home_Framet extends Fragment {
 
 
             //buton
+
             btn_bicce = getActivity().findViewById(R.id.btn_bicce);
             btn_lagrange = getActivity().findViewById(R.id.btn_lagrange);
             btn_raphson = getActivity().findViewById(R.id.btn_raphson);
@@ -137,7 +138,7 @@ public class Home_Framet extends Fragment {
         } );
 
         btn_lagrange.setOnClickListener(View ->{
-            Navigation.findNavController(view).navigate(R.id.diferencias_Divididas);
+            Navigation.findNavController(view).navigate(R.id.lagrange2);
         } );
 
         btn_divididas.setOnClickListener(View ->{
